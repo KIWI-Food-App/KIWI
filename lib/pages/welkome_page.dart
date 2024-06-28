@@ -9,20 +9,25 @@ class WelkomePage extends StatefulWidget {
 }
 
 class _WelkomePageState extends State<WelkomePage> {
+  final image = const AssetImage('img/kiwi_logo.jpg');
   @override
   Widget build(BuildContext context) {
-    return const Scaffold (
+    
+    
+    return Scaffold (
       backgroundColor: Colors.white,
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Image(image: image, width: 100, height: 100),
                 const Text(
-                  "KIWI",
+                  "\nKIWI",
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
               ],
