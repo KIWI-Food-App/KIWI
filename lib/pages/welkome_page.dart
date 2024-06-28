@@ -58,6 +58,24 @@ class _WelkomePageState extends State<WelkomePage> {
               width: 100,
               color: greyButton,
             ),
+            SizedBox(
+              width: 335,
+              height: 50,
+              child: ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.all<Color>(kiwiGreen), 
+                textStyle: WidgetStateProperty.all<TextStyle>(buttonStyle),
+                foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))
+                )
+                ),
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/intro1');
+                },
+                child: const Text('GET STARTED'),
+              ),
+            )
           ],
         ),
       ),
