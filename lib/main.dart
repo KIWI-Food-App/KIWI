@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'pages/welkome_page.dart';
 import 'providers/provider.dart';
 
 
@@ -23,12 +24,17 @@ class MyApp extends StatelessWidget {
       title: '',
       initialRoute: '/',
       routes: {
-        '/': (context) => Welkome_page(),
-        '/intro1': (context) => Intro_1_page(),
-        '/intro2': (context) => Intro_2_page(),
-        '/intro3': (context) => Intro_3_page(),
-        '/sign': (context) => Sign_page(),
-        //доделать
+        '/': (context) => WelkomePage(),
+        // '/intro1': (context) => Intro1Page(),
+        // '/intro2': (context) => Intro2Page(),
+        // '/intro3': (context) => Intro3Page(),
+        // '/sign': (context) => SignPage(),
+        // '/list': (context) => ListPage(),
+        // '/settings': (context) => SettingsPage(),
+        // '/day': (context) => DatPage(),
+        // '/set': (context) => SetPage(),
+        // '/timer': (context) => TimerPage(),
+        // '/result': (context) => ResultPage(),
       },
     );
   }
