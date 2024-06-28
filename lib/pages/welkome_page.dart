@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:start_folder_to_zip/data/styles.dart';
 // import 'package:flutter/widgets.dart';
 
 class WelkomePage extends StatefulWidget {
@@ -26,12 +27,37 @@ class _WelkomePageState extends State<WelkomePage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image(image: image, width: 100, height: 100),
-                const Text(
+                Text(
                   "\nKIWI",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  style: logoStyle,
                 ),
               ],
-            )
+            ),
+            Text(
+              "Title",
+              style: titleStyle,
+            ),
+            Text(
+              "basicStyle",
+              style: basicStyle,
+            ),
+            Container(
+              color: Colors.green,
+              child: Text(
+              "BUTTON STYLE",
+              style: buttonStyle,
+              ),
+            ),
+            Container(
+              height: 100,
+              width: 100,
+              color: kiwiGreen,
+            ),
+            Container(
+              height: 100,
+              width: 100,
+              color: greyButton,
+            ),
           ],
         ),
       ),
