@@ -4,6 +4,13 @@ import '../data/day.dart';
 
 class DayProvider extends ChangeNotifier {
 
+  int _counter = 0;
+  int get counter => _counter;
+  set counter(int value) {
+    _counter = value;
+    notifyListeners();
+  }
+
   int _weight = 0;
   int get weight => _weight;
   set weight(int value) {
@@ -25,7 +32,7 @@ class DayProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  String _gender = "";
+  String _gender = "Male";
   String get gender => _gender;
   set gender(String value) {
     _gender = value;
@@ -81,9 +88,9 @@ class DayProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  int _totalTime = 0;
-  int get totalTime => _totalTime;
-  set totalTime(int value) {
+  String _totalTime = "";
+  String get totalTime => _totalTime;
+  set totalTime(String value) {
     _totalTime = value;
     notifyListeners();
   }
