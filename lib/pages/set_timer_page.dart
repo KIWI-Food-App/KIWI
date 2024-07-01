@@ -73,6 +73,7 @@ class _SetPageState extends State<SetPage> {
                 onPressed: () {
                   dayProvider.hours = int.parse(controller.text);
                   dayProvider.minutes = int.parse(controller2.text);
+                  dayProvider.saveTimeToLocalStorage();
                   if (dayProvider.hours < 99 && dayProvider.hours >= 0 && dayProvider.minutes < 60 && dayProvider.minutes > 0) {
                     Navigator.of(context).pushNamed('/timer');
                   } else {

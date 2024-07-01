@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../data/styles.dart';
 import '../providers/provider.dart';
 
@@ -17,6 +18,29 @@ class _SettingsPageState extends State<SettingsPage> {
   final TextEditingController controller3 = TextEditingController();
   final TextEditingController controller4 = TextEditingController();
   String dropdownValue = 'Male';
+
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late Future<int> _weight;
+  late Future<int> _height;
+  late Future<int> _age;
+  late Future<String> _gender;
+
+  @override
+  void initState() {
+    super.initState();
+    _weight = _prefs.then((SharedPreferences prefs) {
+      return prefs.getInt('weight') ?? 0;
+    });
+    _height = _prefs.then((SharedPreferences prefs) {
+      return prefs.getInt('height') ?? 0;
+    });
+    _age = _prefs.then((SharedPreferences prefs) {
+      return prefs.getInt('age') ?? 0;
+    });
+    _gender = _prefs.then((SharedPreferences prefs) {
+      return prefs.getString('gender') ?? "Male";
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,46 +76,63 @@ class _SettingsPageState extends State<SettingsPage> {
             Expanded(
                 flex: 6,
                 child: Column(children: [
-                  SizedBox(
+                  FutureBuilder(
+                            future: _weight,
+                            builder: (BuildContext context,
+                                AsyncSnapshot<int> snapshot) {
+                              return SizedBox(
                     width: 320,
                     height: 40,
                     child: TextField(
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
-                        hintText: 'your weight — ${dayProvider.weight}',
+                        hintText: 'your weight — ${snapshot.data} kg',
                       ),
                       keyboardType: TextInputType.number,
                       controller: controller,
                     ),
-                  ),
+                  );
+                }),
                   const Padding(padding: EdgeInsets.only(top: 10)),
-                  SizedBox(
+                  FutureBuilder(
+                            future: _height,
+                            builder: (BuildContext context,
+                                AsyncSnapshot<int> snapshot) {
+                              return SizedBox(
                     width: 320,
                     height: 40,
                     child: TextField(
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
-                        hintText: 'your height — ${dayProvider.height}',
+                        hintText: 'your height — ${snapshot.data} cm',
                       ),
                       keyboardType: TextInputType.number,
                       controller: controller2,
                     ),
-                  ),
+                  );}),
                   const Padding(padding: EdgeInsets.only(top: 10)),
-                  SizedBox(
+                  FutureBuilder(
+                            future: _age,
+                            builder: (BuildContext context,
+                                AsyncSnapshot<int> snapshot) {
+                              return SizedBox(
                     width: 320,
                     height: 40,
                     child: TextField(
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
-                        hintText: 'your age — ${dayProvider.age}',
+                        hintText: 'your age — ${snapshot.data} years',
                       ),
                       keyboardType: TextInputType.number,
                       controller: controller3,
                     ),
-                  ),
+                  );}),
                   const Padding(padding: EdgeInsets.only(top: 10)),
-                  SizedBox(
+                  FutureBuilder(
+                            future: _gender,
+                            builder: (BuildContext context,
+                                AsyncSnapshot<String> snapshot) {
+                              return SizedBox(
                     width: 320,
                     height: 40,
                     child: ElevatedButton(
@@ -111,13 +152,21 @@ class _SettingsPageState extends State<SettingsPage> {
                       onPressed: () {
                         if (dayProvider.gender == 'Male') {
                           dayProvider.gender = 'Female';
+                          dayProvider.saveSignToLocalStorage();
+                          setState(() {
+                            _gender = _prefs.then((SharedPreferences prefs) {
+                              return prefs.getString('gender') ?? "Male";
+                            });
+                          });
                         } else {
                           dayProvider.gender = 'Male';
+                          dayProvider.saveSignToLocalStorage();
+                          setState(() {});
                         }
                       },
                       child: Text('your gender — ${dayProvider.gender}'),
                     ),
-                  ),
+                  );}),
                 ])),
             SizedBox(
               width: 335,
@@ -135,6 +184,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   dayProvider.weight = int.parse(controller.text);
                   dayProvider.height = int.parse(controller2.text);
                   dayProvider.age = int.parse(controller3.text);
+                  dayProvider.saveSignToLocalStorage();
                   Navigator.of(context).pushNamed('/list');
                 },
                 child: const Text('SAVE SETTINGS'),

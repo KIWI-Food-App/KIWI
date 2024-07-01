@@ -135,6 +135,8 @@ class _ResultPageState extends State<ResultPage> {
                     dayProvider.totalTime,
                     dayProvider.reaction,
                   ));
+                  dayProvider.resetDay();
+                  dayProvider.saveDays(dayProvider.days);
                   Navigator.of(context).pushNamed('/list');
                 },
                 child: const Text('FINISH'),

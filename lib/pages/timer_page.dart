@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../data/styles.dart';
 import '../providers/provider.dart';
 import '../data/animation.dart';
@@ -13,6 +14,29 @@ class TimerPage extends StatefulWidget {
 }
 
 class _TimerPageState extends State<TimerPage> {
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late Future<int> _hours;
+  late Future<int> _minutes;
+  late Future<int> _seconds;
+  late Future<int> _currentTime;
+  
+  @override
+  void initState() {
+    super.initState();
+    _hours = _prefs.then((SharedPreferences prefs) {
+      return prefs.getInt('hours') ?? 0;
+    });
+    _minutes = _prefs.then((SharedPreferences prefs) {
+      return prefs.getInt('minutes') ?? 0;
+    });
+    _seconds = _prefs.then((SharedPreferences prefs) {
+      return prefs.getInt('seconds') ?? 0;
+    });
+    _currentTime = _prefs.then((SharedPreferences prefs) {
+      return prefs.getInt('currentTime') ?? 0;
+    });
+  }
+
   bool notStarted = true;
 
   late Timer _timer;
@@ -146,11 +170,13 @@ class _TimerPageState extends State<TimerPage> {
                       notStarted = false;
                     });
                     startTimer(dayProvider.hours * 60 * 60 + dayProvider.minutes * 60 + dayProvider.seconds - currentTime, dayProvider.hours * 60 * 60 + dayProvider.minutes * 60 + dayProvider.seconds);
+                    dayProvider.saveTimeToLocalStorage();
                   } else {
                     _timer.cancel();
                     setState(() {
                       notStarted = true;
                     });
+                    dayProvider.saveTimeToLocalStorage();
                   }
                 },
                 child: Icon(

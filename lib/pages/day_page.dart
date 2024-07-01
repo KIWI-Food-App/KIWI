@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../data/styles.dart';
 import '../providers/provider.dart';
 
@@ -17,10 +18,32 @@ class _DayPageState extends State<DayPage> {
   final TextEditingController controller3 = TextEditingController();
   final TextEditingController controller4 = TextEditingController();
 
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  late Future<int> _breakfast;
+  late Future<int> _lunch;
+  late Future<int> _dinner;
+  late Future<int> _other;
+
+  @override
+  void initState() {
+    super.initState();
+    _breakfast = _prefs.then((SharedPreferences prefs) {
+      return prefs.getInt('breakfast') ?? 0;
+    });
+    _lunch = _prefs.then((SharedPreferences prefs) {
+      return prefs.getInt('lunch') ?? 0;
+    });
+    _dinner = _prefs.then((SharedPreferences prefs) {
+      return prefs.getInt('dinner') ?? 0;
+    });
+    _other = _prefs.then((SharedPreferences prefs) {
+      return prefs.getInt('other') ?? 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final dayProvider = Provider.of<DayProvider>(context);
-    dayProvider.loadFromLocalStorage();
 
     return Scaffold(
       appBar: AppBar(
@@ -60,18 +83,23 @@ class _DayPageState extends State<DayPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          width: 250,
-                          height: 40,
-                          child: TextField(
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: 'kcal',
-                            ),
-                            keyboardType: TextInputType.number,
-                            controller: controller,
-                          ),
-                        ),
+                        FutureBuilder(
+                            future: _breakfast,
+                            builder: (BuildContext context,
+                                AsyncSnapshot<int> snapshot) {
+                              return SizedBox(
+                                width: 250,
+                                height: 40,
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                    border: const OutlineInputBorder(),
+                                    hintText: '${snapshot.data} kcal',
+                                  ),
+                                  keyboardType: TextInputType.number,
+                                  controller: controller,
+                                ),
+                              );
+                            }),
                         const Padding(padding: EdgeInsets.only(left: 20)),
                         SizedBox(
                           width: 50,
@@ -91,7 +119,9 @@ class _DayPageState extends State<DayPage> {
                             onPressed: () {
                               dayProvider.breakfast =
                                   int.parse(controller.text);
-                              dayProvider.saveToLocalStorage();
+
+                              dayProvider.saveDayToLocalStorage();
+
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text("Breakfast Saved!"),
@@ -117,18 +147,23 @@ class _DayPageState extends State<DayPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
+                         FutureBuilder(
+                            future: _lunch,
+                            builder: (BuildContext context,
+                                AsyncSnapshot<int> snapshot) {
+                              return SizedBox(
                           width: 250,
                           height: 40,
                           child: TextField(
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: 'kcal',
+                            decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              hintText: '${snapshot.data} kcal',
                             ),
                             keyboardType: TextInputType.number,
                             controller: controller2,
                           ),
-                        ),
+                        );
+                                }),
                         const Padding(padding: EdgeInsets.only(left: 20)),
                         SizedBox(
                           width: 50,
@@ -147,6 +182,9 @@ class _DayPageState extends State<DayPage> {
                                             BorderRadius.circular(10)))),
                             onPressed: () {
                               dayProvider.lunch = int.parse(controller2.text);
+
+                              dayProvider.saveDayToLocalStorage();
+
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text("Lunch Saved!"),
@@ -172,18 +210,22 @@ class _DayPageState extends State<DayPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
+                        FutureBuilder(
+                            future: _dinner,
+                            builder: (BuildContext context,
+                                AsyncSnapshot<int> snapshot) {
+                              return SizedBox(
                           width: 250,
                           height: 40,
                           child: TextField(
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: 'kcal',
+                            decoration: InputDecoration(
+                              border: const  OutlineInputBorder(),
+                              hintText: '${snapshot.data} kcal',
                             ),
                             keyboardType: TextInputType.number,
                             controller: controller3,
                           ),
-                        ),
+                        );}),
                         const Padding(padding: EdgeInsets.only(left: 20)),
                         SizedBox(
                           width: 50,
@@ -202,6 +244,7 @@ class _DayPageState extends State<DayPage> {
                                             BorderRadius.circular(10)))),
                             onPressed: () {
                               dayProvider.dinner = int.parse(controller3.text);
+                              dayProvider.saveDayToLocalStorage();
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text("Dinner Saved!"),
@@ -227,18 +270,22 @@ class _DayPageState extends State<DayPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
+                        FutureBuilder(
+                            future: _other,
+                            builder: (BuildContext context,
+                                AsyncSnapshot<int> snapshot) {
+                              return SizedBox(
                           width: 250,
                           height: 40,
                           child: TextField(
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              hintText: 'kcal',
+                            decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              hintText: '${snapshot.data} kcal',
                             ),
                             keyboardType: TextInputType.number,
                             controller: controller4,
                           ),
-                        ),
+                        );}),
                         const Padding(padding: EdgeInsets.only(left: 20)),
                         SizedBox(
                           width: 50,
@@ -257,6 +304,7 @@ class _DayPageState extends State<DayPage> {
                                             BorderRadius.circular(10)))),
                             onPressed: () {
                               dayProvider.other = int.parse(controller4.text);
+                              dayProvider.saveDayToLocalStorage();
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text("Other Saved!"),
@@ -288,11 +336,11 @@ class _DayPageState extends State<DayPage> {
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)))),
                 onPressed: () {
-                  
                   dayProvider.breakfast = int.parse(controller.text);
                   dayProvider.lunch = int.parse(controller2.text);
                   dayProvider.dinner = int.parse(controller3.text);
                   dayProvider.other = int.parse(controller4.text);
+                  dayProvider.saveDayToLocalStorage();
                   Navigator.of(context).pushNamed('/set');
                 },
                 child: const Text('INTERMITTENT FASTING'),
@@ -317,6 +365,7 @@ class _DayPageState extends State<DayPage> {
                   dayProvider.lunch = int.parse(controller2.text);
                   dayProvider.dinner = int.parse(controller3.text);
                   dayProvider.other = int.parse(controller4.text);
+                  dayProvider.saveDayToLocalStorage();
                   Navigator.of(context).pushNamed('/result');
                 },
                 child: const Text('CREATE'),
