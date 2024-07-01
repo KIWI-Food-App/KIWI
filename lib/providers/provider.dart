@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../data/day.dart';
 
 
@@ -110,6 +111,48 @@ class DayProvider extends ChangeNotifier {
   }
   void addDay(Day day) {
     _days.add(day);
+    notifyListeners();
+  }
+
+  void saveToLocalStorage() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    // await prefs.setInt('counter', _counter);
+    // await prefs.setInt('weight', _weight);
+    // await prefs.setInt('height', _height);
+    // await prefs.setInt('age', _age);
+    // await prefs.setString('gender', _gender);
+    await prefs.setInt('breakfast', _breakfast);
+    // await prefs.setInt('lunch', _lunch);
+    // await prefs.setInt('dinner', _dinner);
+    // await prefs.setInt('other', _other);
+    // await prefs.setInt('hours', _hours);
+    // await prefs.setInt('minutes', _minutes);
+    // await prefs.setInt('seconds', _seconds);
+    // await prefs.setString('totalTime', _totalTime);
+    // await prefs.setString('reaction', _reaction.toString());
+    // Добавить конвертацию в json для листа
+  }
+
+  void loadFromLocalStorage() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    // _counter = prefs.getInt('counter') ?? 0;
+    // _weight = prefs.getInt('weight') ?? 0;
+    // _height = prefs.getInt('height') ?? 0;
+    // _age = prefs.getInt('age') ?? 0;
+    // _gender = prefs.getString('gender') ?? "Male";
+    _breakfast = prefs.getInt('breakfast') ?? 0;
+    // _lunch = prefs.getInt('lunch') ?? 0;
+    // _dinner = prefs.getInt('dinner') ?? 0;
+    // _other = prefs.getInt('other') ?? 0;
+    // _hours = prefs.getInt('hours') ?? 0;
+    // _minutes = prefs.getInt('minutes') ?? 0;
+    // _seconds = prefs.getInt('seconds') ?? 0;
+    // _totalTime = prefs.getString('totalTime') ?? "";
+    // _reaction = SessionReaction.values.byName(prefs.getString('reaction') ?? "Excellent");
+    //добавить конвертацию из json для листа
+
     notifyListeners();
   }
 }

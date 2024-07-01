@@ -67,7 +67,7 @@ class _WelkomePageState extends State<WelkomePage> {
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)))),
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/intro1');
+                  Navigator.of(context).pushNamed('/sign');
                 },
                 child: const Text('GET STARTED'),
               ),

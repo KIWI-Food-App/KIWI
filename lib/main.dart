@@ -15,6 +15,8 @@ import 'providers/provider.dart';
 
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(
     MultiProvider(
       providers: [ChangeNotifierProvider(create: (_) => DayProvider())],

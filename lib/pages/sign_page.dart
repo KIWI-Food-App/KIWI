@@ -18,9 +18,13 @@ class _SignPageState extends State<SignPage> {
   final TextEditingController controller4 = TextEditingController();
   String dropdownValue = 'Male';
 
+  // final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
   @override
   Widget build(BuildContext context) {
     final dayProvider = Provider.of<DayProvider>(context);
+    // dayProvider.loadFromLocalStorage();
+    
 
     return Scaffold(
       appBar: AppBar(
@@ -141,6 +145,7 @@ class _SignPageState extends State<SignPage> {
                   dayProvider.weight = int.parse(controller.text);
                   dayProvider.height = int.parse(controller2.text);
                   dayProvider.age = int.parse(controller3.text);
+                  // dayProvider.saveToLocalStorage();
                   Navigator.of(context).pushNamed('/list');
                 },
                 child: const Text('GET STARTED'),

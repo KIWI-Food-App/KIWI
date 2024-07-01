@@ -20,6 +20,7 @@ class _DayPageState extends State<DayPage> {
   @override
   Widget build(BuildContext context) {
     final dayProvider = Provider.of<DayProvider>(context);
+    dayProvider.loadFromLocalStorage();
 
     return Scaffold(
       appBar: AppBar(
@@ -90,6 +91,7 @@ class _DayPageState extends State<DayPage> {
                             onPressed: () {
                               dayProvider.breakfast =
                                   int.parse(controller.text);
+                              dayProvider.saveToLocalStorage();
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text("Breakfast Saved!"),
