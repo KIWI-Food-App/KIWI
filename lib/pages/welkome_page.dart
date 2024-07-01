@@ -18,42 +18,38 @@ class _WelkomePageState extends State<WelkomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image(image: image, width: 100, height: 100),
-                Text(
-                  "\nKIWI",
-                  style: logoStyle,
-                ),
-              ],
-            ),
-            Text(
-              "Title",
-              style: titleStyle,
-            ),
-            Text(
-              "basicStyle",
-              style: basicStyle,
-            ),
-            Container(
-              color: Colors.green,
-              child: Text(
-                "BUTTON STYLE",
-                style: buttonStyle,
+            const Expanded(flex: 5, child: Text(""),),
+            Expanded(
+              flex: 4, 
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image(image: image, width: 100, height: 100),
+                  Text(
+                    "\nKIWI",
+                    style: logoStyle,
+                  ),
+                ],
               ),
             ),
-            Container(
-              height: 100,
-              width: 100,
-              color: kiwiGreen,
+            const Expanded(flex: 4, child: Text(""),),
+             Text(
+                "Welcome",
+                style: titleStyle,
+              ),
+
+            const Expanded(flex: 1, child: Text(""),),
+      
+             Text(
+              "It’s a pleasure to meet you. We are\nexcited that you’re here so let’s get",
+              style: basicStyle, 
             ),
-            Container(
-              height: 100,
-              width: 100,
-              color: greyButton,
-            ),
+            Text("started!", style:  basicStyle,),
+
+            const Expanded(flex: 2, child: Text(""),),
+
+          
             SizedBox(
               width: 335,
               height: 50,
@@ -67,11 +63,12 @@ class _WelkomePageState extends State<WelkomePage> {
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)))),
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/sign');
+                  Navigator.of(context).pushNamed('/intro1');
                 },
                 child: const Text('GET STARTED'),
               ),
-            )
+            ),
+            const Expanded(flex: 2, child: Text(""),),
           ],
         ),
       ),

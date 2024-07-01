@@ -114,45 +114,88 @@ class DayProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void saveToLocalStorage() async {
-    final prefs = await SharedPreferences.getInstance();
+//- - - - - - - - - -
+  Future<void> saveDay(Day day) async {
+  final prefs = await SharedPreferences.getInstance();
+  final jsonString = dayToJson(day);
+  await prefs.setString('day', jsonString);
+}
 
-    // await prefs.setInt('counter', _counter);
-    // await prefs.setInt('weight', _weight);
-    // await prefs.setInt('height', _height);
-    // await prefs.setInt('age', _age);
-    // await prefs.setString('gender', _gender);
+Future<Day?> loadDay() async {
+  final prefs = await SharedPreferences.getInstance();
+  final jsonString = prefs.getString('day');
+  if (jsonString != null) {
+    return dayFromJson(jsonString);
+  } else {
+    return null;
+  }
+}
+
+Future<void> saveDays(List<Day> days) async {
+  final prefs = await SharedPreferences.getInstance();
+  final jsonStrings = days.map((day) => dayToJson(day)).toList();
+  await prefs.setStringList('days', jsonStrings);
+}
+
+Future<List<Day>> loadDays() async {
+  final prefs = await SharedPreferences.getInstance();
+  final jsonStrings = prefs.getStringList('days');
+  if (jsonStrings != null) {
+    return jsonStrings.map((jsonString) => dayFromJson(jsonString)).toList();
+  } else {
+    return [];
+  }
+}
+
+//- - - - - - - - - -
+
+  void saveDayToLocalStorage() async {
+    final prefs = await SharedPreferences.getInstance();
     await prefs.setInt('breakfast', _breakfast);
-    // await prefs.setInt('lunch', _lunch);
-    // await prefs.setInt('dinner', _dinner);
-    // await prefs.setInt('other', _other);
-    // await prefs.setInt('hours', _hours);
-    // await prefs.setInt('minutes', _minutes);
-    // await prefs.setInt('seconds', _seconds);
-    // await prefs.setString('totalTime', _totalTime);
-    // await prefs.setString('reaction', _reaction.toString());
-    // Добавить конвертацию в json для листа
+    await prefs.setInt('lunch', _lunch);
+    await prefs.setInt('dinner', _dinner);
+    await prefs.setInt('other', _other);
   }
 
-  void loadFromLocalStorage() async {
+  // void loadDayFromLocalStorage() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   _breakfast = prefs.getInt('breakfast') ?? 0;
+  //   _lunch = prefs.getInt('lunch') ?? 0;
+  //   _dinner = prefs.getInt('dinner') ?? 0;
+  //   _other = prefs.getInt('other') ?? 0;
+  //   notifyListeners();
+  // }
+
+  void resetDay() async {
     final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('breakfast', 0);
+    await prefs.setInt('lunch', 0);
+    await prefs.setInt('dinner', 0);
+    await prefs.setInt('other', 0);
+  }
 
-    // _counter = prefs.getInt('counter') ?? 0;
-    // _weight = prefs.getInt('weight') ?? 0;
-    // _height = prefs.getInt('height') ?? 0;
-    // _age = prefs.getInt('age') ?? 0;
-    // _gender = prefs.getString('gender') ?? "Male";
-    _breakfast = prefs.getInt('breakfast') ?? 0;
-    // _lunch = prefs.getInt('lunch') ?? 0;
-    // _dinner = prefs.getInt('dinner') ?? 0;
-    // _other = prefs.getInt('other') ?? 0;
-    // _hours = prefs.getInt('hours') ?? 0;
-    // _minutes = prefs.getInt('minutes') ?? 0;
-    // _seconds = prefs.getInt('seconds') ?? 0;
-    // _totalTime = prefs.getString('totalTime') ?? "";
-    // _reaction = SessionReaction.values.byName(prefs.getString('reaction') ?? "Excellent");
-    //добавить конвертацию из json для листа
+  void saveSignToLocalStorage() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('weight', _weight);
+    await prefs.setInt('height', _height);
+    await prefs.setInt('age', _age);
+    await prefs.setString('gender', _gender);
+  }
 
-    notifyListeners();
+  // void loadSignFromLocalStorage() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   _weight = prefs.getInt('weight') ?? 0;
+  //   _height = prefs.getInt('height') ?? 0;
+  //   _age = prefs.getInt('age') ?? 0;
+  //   _gender = prefs.getString('gender') ?? "Male";
+  //   notifyListeners();
+  // }
+
+  void saveTimeToLocalStorage() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('hours', _hours);
+    await prefs.setInt('minutes', _minutes);
+    await prefs.setInt('seconds', _seconds);
+    await prefs.setString('totalTime', _totalTime);
   }
 }

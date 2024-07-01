@@ -22,3 +22,7 @@ flutter:
   uses-material-design: true
   assets:
     - img/kiwi_logo.jpg
+    - img/intro_1.jpg
+    - img/intro_2.jpg
+    - img/intro_3.jpg
+    - img/intro_3.png

@@ -1,20 +1,14 @@
-2024/07/01-19:48:21.174 8603 Reusing MANIFEST /private/var/folders/4f/21n1q30n5g77kks4s950g4jc0000gn/T/flutter_tools.IyXjAf/flutter_tools_chrome_device.rmXxlN/Default/shared_proto_db/MANIFEST-000001
-2024/07/01-19:48:21.175 8603 Recovering log #16
-2024/07/01-19:48:21.175 8603 Reusing old log /private/var/folders/4f/21n1q30n5g77kks4s950g4jc0000gn/T/flutter_tools.IyXjAf/flutter_tools_chrome_device.rmXxlN/Default/shared_proto_db/000016.log 
-2024/07/01-19:48:21.175 8603 Delete type=0 #13
-2024/07/01-19:48:21.175 8603 Delete type=0 #7
-2024/07/01-19:48:21.175 8603 Delete type=0 #4
-2024/07/01-19:48:21.175 8603 Delete type=0 #10
-2024/07/01-19:48:21.175 8603 Delete type=0 #3
-2024/07/01-19:49:23.897 b003 Level-0 table #20: started
-2024/07/01-19:49:23.912 b003 Level-0 table #20: 125200 bytes OK
-2024/07/01-19:49:23.920 b003 Delete type=0 #16
-2024/07/01-19:49:23.924 b003 Compacting 4@0 + 1@1 files
-2024/07/01-19:49:23.949 b003 Generated table #21@0: 1073 keys, 151284 bytes
-2024/07/01-19:49:23.949 b003 Compacted 4@0 + 1@1 files => 151284 bytes
-2024/07/01-19:49:23.961 b003 compacted to: files[ 0 1 1 0 0 0 0 ]
-2024/07/01-19:49:23.961 b003 Delete type=2 #14
-2024/07/01-19:49:23.961 b003 Delete type=2 #17
-2024/07/01-19:49:23.961 b003 Delete type=2 #11
-2024/07/01-19:49:23.961 b003 Delete type=2 #8
-2024/07/01-19:49:23.961 b003 Delete type=2 #20
+2024/07/02-02:36:55.377 8403 Reusing MANIFEST /private/var/folders/4f/21n1q30n5g77kks4s950g4jc0000gn/T/flutter_tools.fabqRz/flutter_tools_chrome_device.OIgQrn/Default/shared_proto_db/MANIFEST-000001
+2024/07/02-02:36:55.377 8403 Recovering log #15
+2024/07/02-02:36:55.378 8403 Reusing old log /private/var/folders/4f/21n1q30n5g77kks4s950g4jc0000gn/T/flutter_tools.fabqRz/flutter_tools_chrome_device.OIgQrn/Default/shared_proto_db/000015.log 
+2024/07/02-02:36:55.378 8403 Delete type=0 #13
+2024/07/02-02:36:55.378 8403 Delete type=0 #7
+2024/07/02-02:36:55.378 8403 Delete type=0 #4
+2024/07/02-02:36:55.378 8403 Delete type=0 #10
+2024/07/02-02:36:55.378 8403 Delete type=0 #3
+2024/07/02-02:36:55.378 8403 Delete type=2 #5
+2024/07/02-02:36:55.378 8403 Delete type=2 #11
+2024/07/02-02:36:55.378 8403 Delete type=2 #8
+2024/07/02-02:37:05.244 a807 Level-0 table #19: started
+2024/07/02-02:37:05.265 a807 Level-0 table #19: 123954 bytes OK
+2024/07/02-02:37:05.291 a807 Delete type=0 #15
