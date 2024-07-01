@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../data/styles.dart';
 import '../providers/provider.dart';
+import '../data/animation.dart';
 
 class TimerPage extends StatefulWidget {
   const TimerPage({super.key});
@@ -17,11 +18,13 @@ class _TimerPageState extends State<TimerPage> {
   late Timer _timer;
   String timeEnd = "--:--:--";
   String toTime = "--:--:--";
-  // bool checker = false;
   int currentTime = 0;
   int timeToEnd = 0;
 
-  void startTimer(int timeToEnd) {
+  bool isPaused = true;
+  double percentage = 100.0;
+
+  void startTimer(int timeToEnd, int allTime) {
     int hoursTo = 0;
     int minutesTo = 0;
     int secondsTo = 0;
@@ -47,11 +50,6 @@ class _TimerPageState extends State<TimerPage> {
       hoursTo = currentTime ~/ 3600;
       minutesTo = (currentTime % 3600) ~/ 60;
       secondsTo = (currentTime % 3600) % 60;
-
-      // if (checker) {
-      //   checker = false;
-      //   timer.cancel();
-      // }
 
       if (hoursEnd < 10) {
         strHourEnd = "0$hoursEnd";
@@ -89,7 +87,9 @@ class _TimerPageState extends State<TimerPage> {
       }
       setState(() {
         toTime = "$strHourTo:$strMinuteTo:$strSecondTo";
+        percentage = (currentTime / (allTime + 1)).clamp(0.0, 1.0);
       });
+      
 
       if (timeToEnd == 0) {
         timer.cancel();
@@ -109,6 +109,7 @@ class _TimerPageState extends State<TimerPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Intermittent Fasting', style: basicStyle),
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
       ),
       backgroundColor: Colors.white,
@@ -117,6 +118,11 @@ class _TimerPageState extends State<TimerPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Expanded(flex: 1, child: Text('')),
+            CustomPaint(
+              size: Size(200, 200), 
+              painter: CirclePainter(percentage),
+            ),
+            // const Expanded(flex: 1, child: Text('')),
             Text(timeEnd, style: const TextStyle(fontSize: 100)),
             const SizedBox(height: 30),
             Text("PASSED TIME: $toTime", style: basicStyle),
@@ -139,7 +145,7 @@ class _TimerPageState extends State<TimerPage> {
                     setState(() {
                       notStarted = false;
                     });
-                    startTimer(dayProvider.hours * 60 * 60 + dayProvider.minutes * 60 + dayProvider.seconds - currentTime);
+                    startTimer(dayProvider.hours * 60 * 60 + dayProvider.minutes * 60 + dayProvider.seconds - currentTime, dayProvider.hours * 60 * 60 + dayProvider.minutes * 60 + dayProvider.seconds);
                   } else {
                     _timer.cancel();
                     setState(() {

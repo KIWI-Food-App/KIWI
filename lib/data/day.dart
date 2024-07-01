@@ -17,6 +17,7 @@ class Day {
     this.reaction);
 }
 
+
 enum Gender {
   Male,
   Female
