@@ -3,10 +3,10 @@ name: Build Web
 on: 
     push:
         branches:
-            - branch_8
+            - main
     pull_request:
         branches:
-            - branch_8
+            - main
 
 jobs:
     test:
