@@ -9,6 +9,8 @@ import '../data/animation.dart';
 class TimerPage extends StatefulWidget {
   const TimerPage({super.key});
 
+  static const routeName = '/timer_page';
+
   @override
   State<TimerPage> createState() => _TimerPageState();
 }
