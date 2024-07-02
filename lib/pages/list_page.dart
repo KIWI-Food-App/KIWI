@@ -78,7 +78,7 @@ class _ListPageState extends State<ListPage> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             mainAxisSize: MainAxisSize.max,
                             children: [
-                              for (Day day in snapshot.data ?? [])
+                              for (Day day in dayProvider.days ?? [])
                                 Container(
                                   width: 335,
                                   height: 50,
