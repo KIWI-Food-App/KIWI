@@ -7,9 +7,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:start_folder_to_zip/main.dart';
-import '../lib/pages/day_page.dart';
 import '../lib/pages/welkome_page.dart';
 
 void main() {
