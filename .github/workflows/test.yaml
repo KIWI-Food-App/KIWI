@@ -1,0 +1,38 @@
+name: Build Web
+
+on: 
+    push:
+        branches:
+            - branch_8
+    pull_request:
+        branches:
+            - branch_8
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: subosito/flutter-action@v2
+              with:
+                channel: stable
+                flutter-version: 3.22.2
+            - run: flutter pub get
+
+            - run: flutter test test/unit_test.dart
+
+            - run: flutter test test/widget_test.dart
+
+            - run: flutter analyze  --no-fatal-warnings --no-fatal-infos lib/pages/ 
+
+            - run: flutter build web --release lib/main.dart
+
+            - uses: bluefireteam/flutter-gh-pages@v7
+              with:
+                baseHref: /KIWI/
+                customArgs: "lib/main.dart"
+
+
+
+            
+
