@@ -14,7 +14,7 @@ Figma — https://www.figma.com/design/FSfNt6sXIwYRk5Au9dkmou/Untitled?node-id=1
 - interval fasting timer
 - User's day history
 
-#Detailed instructions for setup and usage.
+# Detailed instructions for setup and usage.
 
 To get started, the user needs to: 
 1) complete the training
