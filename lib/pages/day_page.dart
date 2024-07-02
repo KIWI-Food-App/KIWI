@@ -7,6 +7,8 @@ import '../providers/provider.dart';
 class DayPage extends StatefulWidget {
   const DayPage({super.key});
 
+  static const routeName = '/day_page';
+
   @override
   State<DayPage> createState() => _DayPageState();
 }

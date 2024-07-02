@@ -8,6 +8,8 @@ import '../providers/provider.dart';
 class ListPage extends StatefulWidget {
   const ListPage({super.key});
 
+  static const routeName = '/list_page';
+
   @override
   State<ListPage> createState() => _ListPageState();
 }
